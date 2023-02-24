@@ -1,0 +1,12 @@
+.product {
+  max-width: 15rem;
+  margin-bottom: 30px;
+}
+
+.product h4 {
+  color: #000;
+}
+
+.product p {
+  color: #000;
+}
