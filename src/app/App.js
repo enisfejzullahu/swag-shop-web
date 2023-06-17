@@ -25,11 +25,7 @@ function App() {
     const list = products.map((product) => {
       return (
         <div className="col-sm-4" key={product._id}>
-          <Product
-            title={product.title}
-            price={product.price}
-            imgUrl={product.imgUrl}
-          />
+          <Product product={product} />
         </div>
       );
     });

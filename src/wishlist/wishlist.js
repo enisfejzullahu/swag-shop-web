@@ -1,29 +1,39 @@
 import React, { Component } from "react";
 import "../wishlist/wishlist.css";
 import DataService from "../services/data-service";
+import NotificationService, {NOTIF_WISHLIST_CHANGED} from "../services/notification-service";
 
 import ProductCondensed from "../productCondensed/productCondensed"
+import Product from "../product/product";
 
+let ns = new NotificationService;
 class Wishlist extends Component {
 
   state = {
     wishlist: [
       {
-        title: "RMA Hoodie",
-        price: 19.99,
-        _id: "ajaja123"
+        title: "Real Madrid Ball",
+        price: "9.99",
+        id: "akakfdkhf"
       },
       {
-        title: "iPhone Case",
-        price: 9.99,
-        _id: "ajbaa123"
-      },
-      {
-        title: "Baloon",
-        price: 0.99,
-        _id: "baaja12"
+        title: "Real Madrid T-Shirt",
+        price: "9.99",
+        id: "akakfhadkhf"
       },
     ]
+  }
+
+  componentDidMount() {
+    ns.addObserver(NOTIF_WISHLIST_CHANGED, this, this.onWishlistChanged)
+  }
+
+  componentWillUnmount() {
+    ns.removeObserver(this, NOTIF_WISHLIST_CHANGED);
+  }
+
+  onWishlistChanged(newWishList) {
+     this.setState({wishList: newWishList})
   }
 
   createWishList = () => {
@@ -41,6 +51,7 @@ class Wishlist extends Component {
         <div className="card-block">
           <h4 className="card-title">Wish List</h4>
           <ul className="list-group">
+
             {this.createWishList()}
           </ul>
         </div>
